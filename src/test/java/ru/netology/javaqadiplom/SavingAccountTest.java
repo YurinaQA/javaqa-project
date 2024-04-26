@@ -122,4 +122,79 @@ public class SavingAccountTest {
         });
     }
 
+    @Test //Проверка minBalance отрицательного баланса
+    public void minBalanceNegative() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new SavingAccount(
+                    2_000,
+                    -1_000,
+                    10_000,
+                    5
+            );
+        });
+    }
+
+    @Test //Проверка maxBalance отрицательного баланса
+    public void maxBalanceNegative() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new SavingAccount(
+                    2_000,
+                    1_000,
+                    -10_000,
+                    5
+            );
+        });
+    }
+
+    @Test //Проверка отрицательной ставки
+    public void rateNegative() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new SavingAccount(
+                    2_000,
+                    1_000,
+                    10_000,
+                    -5
+            );
+        });
+    }
+
+    @Test
+    public void maxBalanceLessMinBalance() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new SavingAccount(
+                    2_000,
+                    1_000,
+                    100,
+                    5
+            );
+        });
+
+    }
+
+    @Test
+    public void initialBalanceLessMinBalance() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new SavingAccount(
+                    200,
+                    1_000,
+                    10_000,
+                    5
+            );
+        });
+
+    }
+
+    @Test
+    public void initialBalanceMoreMaxBalance() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new SavingAccount(
+                    20_000,
+                    1_000,
+                    10_000,
+                    5
+            );
+        });
+
+    }
+
 }
