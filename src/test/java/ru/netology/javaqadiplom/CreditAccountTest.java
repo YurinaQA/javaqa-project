@@ -114,4 +114,65 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(0, account.yearChange());
     }
+    @Test
+    public void shouldDecreasedBalance() {
+        CreditAccount account = new CreditAccount(
+                8_000,
+                5_000,
+                15
+        );
+
+        account.pay(1_000);
+
+        Assertions.assertEquals(7_000, account.getBalance());
+    }
+    @Test
+    public void shouldDecreasedBalanceToLimit() {
+        CreditAccount account = new CreditAccount(
+                8_000,
+                5_000,
+                15
+        );
+
+        account.pay(2_000);
+
+        Assertions.assertEquals(6_000, account.getBalance());
+    }
+    @Test
+    public void shouldExceptIfCreditLimitNegative() {
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new CreditAccount(2_000,
+                    -1_000,
+                    15);
+        });
+    }
+    @Test
+    public void debtIfBalancePositive(){
+        CreditAccount account = new CreditAccount(
+                1_000,
+                5_000,
+                15
+        );
+        account.pay(500);
+        Assertions.assertEquals(0, account.yearChange());
+    }
+    @Test
+    public void shouldExceptIfInitialBalanceNull() {
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new CreditAccount(0,
+                    1_000,
+                    15);
+        });
+    }
+    @Test
+    public void shouldExceptIfCreditLimitNegative2() {
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new CreditAccount(-2_000,
+                    1_000,
+                    15);
+        });
+    }
 }
