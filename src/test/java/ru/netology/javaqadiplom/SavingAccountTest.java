@@ -197,4 +197,67 @@ public class SavingAccountTest {
 
     }
 
+    @Test
+    public void payNegative() {
+        SavingAccount account = new SavingAccount(2_000, 1_000, 10_000, 5);
+
+
+        boolean result = account.pay(-1_000);
+
+        Assertions.assertEquals(2_000, account.getBalance());
+    }
+
+    @Test
+    public void payZero() {
+        SavingAccount account = new SavingAccount(2_000, 1_000, 10_000, 5);
+        boolean result = account.pay(0);
+
+        Assertions.assertEquals(2_000, account.getBalance());
+    }
+
+    @Test
+    public void successfulPay() {
+        SavingAccount account = new SavingAccount(2_000, 500, 10_000, 5);
+        boolean result = account.pay(100);
+
+        Assertions.assertEquals(1_900, account.getBalance());
+    }
+
+    @Test
+    public void balanceNegativePay() {
+        SavingAccount account = new SavingAccount(2_000, 500, 10_000, 5);
+
+        boolean result = account.pay(2_500);
+
+        Assertions.assertEquals(2000, account.getBalance());
+        Assertions.assertEquals(false, result);
+
+    }
+
+    @Test
+    public void balanceEqualMinBalance() {
+        SavingAccount account = new SavingAccount(2_000, 1_000, 10_000, 5);
+
+        boolean result = account.pay(1_000);
+
+        Assertions.assertEquals(1_000, account.getBalance());
+        Assertions.assertEquals(true, result);
+    }
+
+    @Test
+    public void interestOnTheBalance() {
+        SavingAccount account = new SavingAccount(
+                2_000,
+                1_000,
+                10_000,
+                5
+        );
+
+        int result = account.yearChange();
+
+        Assertions.assertEquals(100, result);
+    }
+
+
+
 }
