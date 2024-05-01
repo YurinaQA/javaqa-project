@@ -65,12 +65,12 @@ public class SavingAccount extends Account {
             return false;
         }
         balance = balance - amount;
-        if (balance > minBalance) {
+        if (balance >= minBalance) {
             return true;
         } else {
+            balance = balance + amount;
             return false;
         }
-    }
 
     /**
      * Операция пополнения карты на указанную сумму.
@@ -83,18 +83,18 @@ public class SavingAccount extends Account {
      * @param amount
      * @return
      */
-    @Override
-    public boolean add(int amount) {
-        if (amount <= 0) {
-            return false;
+        @Override
+        public boolean add(int amount) {
+            if (amount <= 0) {
+                return false;
+            }
+            if (balance + amount < maxBalance) {
+                balance = balance + amount;
+                return true;
+            } else {
+                return false;
+            }
         }
-        if (balance + amount < maxBalance) {
-            balance = balance + amount;
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     /**
      * Операция расчёта процентов на остаток счёта при условии, что
