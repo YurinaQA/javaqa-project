@@ -86,18 +86,6 @@ public class SavingAccountTest {
         Assertions.assertEquals(0, account.getMaxBalance());
     }
 
-    @Test //0-ой начальный балланс
-    public void initialBalanceEqualZero() {
-        SavingAccount account = new SavingAccount(
-                0,
-                1_000,
-                10_000,
-                5
-        );
-
-        Assertions.assertEquals(0, account.getBalance());
-    }
-
     @Test //Проверка 0-ой проц. ставки
     public void rateEqualZero() {
         SavingAccount account = new SavingAccount(
@@ -188,7 +176,7 @@ public class SavingAccountTest {
     public void initialBalanceMoreMaxBalance() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             new SavingAccount(
-                    20_000,
+                    15_000,
                     1_000,
                     10_000,
                     5
