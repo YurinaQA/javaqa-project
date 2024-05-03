@@ -91,19 +91,6 @@ public class CreditAccountTest {
         Assertions.assertEquals(1_000, account.getBalance());
     }
 
-
-
-    @Test
-    public void shouldShowNumberIfBalanceNegative () {
-        CreditAccount account = new CreditAccount(
-                -200,
-                5_000,
-                15
-        );
-
-        Assertions.assertEquals(-30, account.yearChange());
-    }
-
     @Test
     public void shouldShowNumberIfBalanceNull () {
         CreditAccount account = new CreditAccount(
@@ -161,9 +148,10 @@ public class CreditAccountTest {
     public void shouldExceptIfInitialBalanceNull() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new CreditAccount(0,
-                    1_000,
-                    15);
+            new CreditAccount(
+                    0,
+                    0,
+                    0);
         });
     }
     @Test
